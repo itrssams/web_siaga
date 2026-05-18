@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Doctors\Schemas;
 
-use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Schema;
 
@@ -12,26 +12,18 @@ class DoctorInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('name'),
-                TextEntry::make('slug'),
-                TextEntry::make('specialist'),
-                TextEntry::make('clinic')
+                ImageEntry::make('photo')
+                    ->label('Foto')
+                    ->circular()
                     ->placeholder('-'),
-                TextEntry::make('photo')
+                TextEntry::make('name')
+                    ->label('Nama'),
+                TextEntry::make('specialization.name')
+                    ->label('Spesialisasi')
                     ->placeholder('-'),
-                TextEntry::make('registration_number')
+                TextEntry::make('polyclinic.name')
+                    ->label('Poliklinik')
                     ->placeholder('-'),
-                TextEntry::make('practice_license_number')
-                    ->placeholder('-'),
-                TextEntry::make('phone')
-                    ->placeholder('-'),
-                TextEntry::make('bio')
-                    ->placeholder('-')
-                    ->columnSpanFull(),
-                IconEntry::make('is_active')
-                    ->boolean(),
-                TextEntry::make('sort_order')
-                    ->numeric(),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),

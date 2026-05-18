@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Doctor extends Model
@@ -11,31 +12,37 @@ class Doctor extends Model
     protected $fillable = [
         'name',
         'slug',
-        'specialist',
-        'clinic',
         'photo',
-        'registration_number',
-        'practice_license_number',
-        'phone',
-        'bio',
-        'is_active',
-        'sort_order',
+        'specialization_id',
+        'polyclinic_id',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'is_active' => 'boolean',
-        ];
-    }
 
     protected static function booted(): void
     {
         static::saving(function (Doctor $doctor): void {
             if (blank($doctor->slug) && filled($doctor->name)) {
-                $doctor->slug = Str::slug($doctor->name);
+                $baseSlug = Str::slug($doctor->name);
+                $slug = $baseSlug;
+                $counter = 2;
+
+                while (static::where('slug', $slug)->whereKeyNot($doctor->getKey())->exists()) {
+                    $slug = "{$baseSlug}-{$counter}";
+                    $counter++;
+                }
+
+                $doctor->slug = $slug;
             }
         });
+    }
+
+    public function specialization(): BelongsTo
+    {
+        return $this->belongsTo(Specialization::class);
+    }
+
+    public function polyclinic(): BelongsTo
+    {
+        return $this->belongsTo(Polyclinic::class);
     }
 
     public function schedules(): HasMany

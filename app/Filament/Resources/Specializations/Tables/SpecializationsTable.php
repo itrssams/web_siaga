@@ -1,37 +1,36 @@
 <?php
 
-namespace App\Filament\Resources\Doctors\Tables;
+namespace App\Filament\Resources\Specializations\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
-use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
-class DoctorsTable
+class SpecializationsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                ImageColumn::make('photo')
-                    ->label('Foto')
-                    ->circular(),
                 TextColumn::make('name')
                     ->label('Nama')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('specialization.name')
-                    ->label('Spesialisasi')
-                    ->sortable()
+                TextColumn::make('slug')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
-                TextColumn::make('polyclinic.name')
-                    ->label('Poliklinik')
-                    ->sortable()
-                    ->searchable(),
+                IconColumn::make('is_active')
+                    ->label('Aktif')
+                    ->boolean(),
+                TextColumn::make('sort_order')
+                    ->label('Urutan')
+                    ->numeric()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -42,16 +41,8 @@ class DoctorsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('specialization_id')
-                    ->label('Spesialisasi')
-                    ->relationship('specialization', 'name')
-                    ->searchable()
-                    ->preload(),
-                SelectFilter::make('polyclinic_id')
-                    ->label('Poliklinik')
-                    ->relationship('polyclinic', 'name')
-                    ->searchable()
-                    ->preload(),
+                TernaryFilter::make('is_active')
+                    ->label('Status aktif'),
             ])
             ->recordActions([
                 ViewAction::make(),
