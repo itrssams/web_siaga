@@ -34,10 +34,6 @@ class DoctorScheduleForm
                     ->seconds(false)
                     ->after('start_time')
                     ->required(),
-                TextInput::make('clinic')
-                    ->label('Poli/Klinik')
-                    ->maxLength(255)
-                    ->default(null),
                 TextInput::make('room')
                     ->label('Ruangan')
                     ->maxLength(255)

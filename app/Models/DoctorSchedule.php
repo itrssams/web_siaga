@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class DoctorSchedule extends Model
 {
@@ -22,7 +22,6 @@ class DoctorSchedule extends Model
         'day_of_week',
         'start_time',
         'end_time',
-        'clinic',
         'room',
         'note',
         'is_active',

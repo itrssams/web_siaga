@@ -35,8 +35,8 @@ class DoctorSchedulesTable
                     ->label('Selesai')
                     ->time()
                     ->sortable(),
-                TextColumn::make('clinic')
-                    ->label('Poli')
+                TextColumn::make('doctor.polyclinic.name')
+                    ->label('Poliklinik')
                     ->searchable(),
                 TextColumn::make('room')
                     ->label('Ruangan')
