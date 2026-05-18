@@ -22,7 +22,6 @@ class DoctorSchedule extends Model
         'day_of_week',
         'start_time',
         'end_time',
-        'room',
         'note',
         'is_active',
         'sort_order',

@@ -38,9 +38,6 @@ class DoctorSchedulesTable
                 TextColumn::make('doctor.polyclinic.name')
                     ->label('Poliklinik')
                     ->searchable(),
-                TextColumn::make('room')
-                    ->label('Ruangan')
-                    ->searchable(),
                 TextColumn::make('note')
                     ->label('Catatan')
                     ->limit(40)

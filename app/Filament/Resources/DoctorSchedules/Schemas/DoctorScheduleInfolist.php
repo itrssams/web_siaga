@@ -27,9 +27,6 @@ class DoctorScheduleInfolist
                 TextEntry::make('end_time')
                     ->label('Jam Selesai')
                     ->time(),
-                TextEntry::make('room')
-                    ->label('Ruangan')
-                    ->placeholder('-'),
                 TextEntry::make('note')
                     ->label('Catatan')
                     ->placeholder('-'),
