@@ -1,22 +1,23 @@
 <x-layouts.public title="Beranda">
-    <section class="bg-white">
-        <div class="public-container grid gap-8 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-14">
-            <div class="animate-rise">
-                <p class="public-eyebrow mb-4">Selamat Datang di Rumah Sakit Siaga Al Munawwarah Samarinda</p>
-                <h1 class="max-w-3xl text-4xl font-extrabold leading-tight text-[var(--color-text)] sm:text-5xl">
+    @php
+        $heroImage = 'images/hero-rs.jpg';
+        $hasHeroImage = file_exists(public_path($heroImage));
+    @endphp
+
+    <section class="hero-masthead {{ $hasHeroImage ? 'has-hero-image' : '' }}" @if ($hasHeroImage) style="background-image: linear-gradient(90deg, rgb(5 26 15 / 0.82), rgb(5 26 15 / 0.48) 48%, rgb(5 26 15 / 0.16)), url('{{ asset($heroImage) }}')" @endif>
+        <div class="public-container flex min-h-[calc(100svh-7.5rem)] items-center py-14 sm:min-h-[34rem] lg:min-h-[38rem]">
+            <div class="max-w-3xl animate-rise">
+                <p class="hero-eyebrow mb-4">Selamat Datang di Rumah Sakit Siaga Al Munawwarah Samarinda</p>
+                <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
                     Layanan kesehatan modern dengan sentuhan yang tenang dan personal.
                 </h1>
-                <p class="mt-5 max-w-2xl text-base leading-7 text-[var(--color-muted)] sm:text-lg">
+                <p class="mt-5 max-w-2xl text-base leading-7 text-white/82 sm:text-lg">
                     Temukan informasi dokter, pengumuman resmi, artikel kesehatan, dan sertifikat rumah sakit secara cepat dan jelas.
                 </p>
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                     <a href="{{ route('doctors.index') }}" class="public-btn-primary">Cari Dokter</a>
-                    <a href="#pengumuman" class="public-btn-outline">Lihat Informasi</a>
+                    <a href="#pengumuman" class="hero-btn-outline">Lihat Informasi</a>
                 </div>
-            </div>
-
-            <div class="hero-visual animate-rise-delay">
-                <div class="hero-orbit">RS</div>
             </div>
         </div>
     </section>
