@@ -1,8 +1,17 @@
 <footer class="border-t border-[var(--color-border)] bg-[#0F2419] text-white">
+    @php
+        $logoPath = 'images/logo-rssams.png';
+        $hasLogo = file_exists(public_path($logoPath));
+    @endphp
+
     <div class="public-container grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
             <div class="mb-4 flex items-center gap-3">
-                <span class="flex h-10 w-10 items-center justify-center rounded-md bg-white text-sm font-extrabold text-[#14532D]">RS</span>
+                @if ($hasLogo)
+                    <img src="{{ asset($logoPath) }}" alt="RS Sams" class="h-10 w-10 rounded-md bg-white object-contain">
+                @else
+                    <span class="flex h-10 w-10 items-center justify-center rounded-md bg-white text-sm font-extrabold text-[var(--color-primary-strong)]">RS</span>
+                @endif
                 <div>
                     <p class="font-extrabold">RS Sams</p>
                     <p class="text-sm text-white/70">Rumah Sakit Siaga</p>
