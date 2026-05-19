@@ -13,29 +13,14 @@
 :root {
     --color-primary: #185a34;
     --color-primary-strong: #0f3f26;
-    --color-primary-soft: #fff6dd;
+    --color-primary-soft: #fff7e0;
     --color-accent: #e0ad12;
-    --color-bg: #f8f6ef;
+    --color-bg: #ffffff;
     --color-surface: #ffffff;
     --color-text: #172033;
     --color-muted: #65758b;
     --color-border: #e5ebf2;
     --shadow-premium: 0 24px 70px rgb(15 32 51 / 0.10);
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --color-bg: #07130d;
-        --color-surface: #0f2419;
-        --color-text: #f8fafc;
-        --color-muted: #94a3b8;
-        --color-border: #13281d;
-        --color-primary: #3fd477;
-        --color-primary-strong: #c6f6d5;
-        --color-primary-soft: #2b2411;
-        --color-accent: #f0c23a;
-        --shadow-premium: 0 24px 70px rgb(0 0 0 / 0.25);
-    }
 }
 
 html {
@@ -104,7 +89,8 @@ body {
 }
 
 .public-btn-outline:hover {
-    background: var(--color-primary-soft);
+    background: var(--color-primary);
+    color: #ffffff;
     transform: translateY(-1px);
 }
 
@@ -122,8 +108,8 @@ body {
     overflow: hidden;
     border-radius: 10px;
     background:
-        linear-gradient(135deg, rgb(15 63 38 / 0.24), rgb(224 173 18 / 0.14)),
-        linear-gradient(160deg, #ffffff 0%, #fff6dd 58%, #f3d77a 100%);
+        linear-gradient(135deg, rgb(15 63 38 / 0.16), rgb(224 173 18 / 0.18)),
+        linear-gradient(160deg, #ffffff 0%, #fff7e0 62%, #f6d66a 100%);
     box-shadow: var(--shadow-premium);
     isolation: isolate;
     animation: float-soft 7s ease-in-out infinite;
@@ -135,7 +121,7 @@ body {
     background:
         linear-gradient(100deg, transparent 0%, rgb(255 255 255 / 0.40) 42%, transparent 64%),
         radial-gradient(circle at 22% 24%, rgb(255 255 255 / 0.90), transparent 28%),
-        radial-gradient(circle at 78% 22%, rgb(224 173 18 / 0.30), transparent 22%);
+        radial-gradient(circle at 78% 22%, rgb(224 173 18 / 0.36), transparent 22%);
     transform: translateX(-48%);
     animation: hero-sheen 8s ease-in-out infinite;
     content: '';
