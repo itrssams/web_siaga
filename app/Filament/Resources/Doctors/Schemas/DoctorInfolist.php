@@ -14,6 +14,7 @@ class DoctorInfolist
             ->components([
                 ImageEntry::make('photo')
                     ->label('Foto')
+                    ->disk('public')
                     ->circular()
                     ->placeholder('-'),
                 TextEntry::make('name')

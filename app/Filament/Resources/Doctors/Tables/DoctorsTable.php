@@ -19,6 +19,7 @@ class DoctorsTable
             ->columns([
                 ImageColumn::make('photo')
                     ->label('Foto')
+                    ->disk('public')
                     ->circular(),
                 TextColumn::make('name')
                     ->label('Nama')

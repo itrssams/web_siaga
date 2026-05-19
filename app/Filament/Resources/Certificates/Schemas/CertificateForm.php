@@ -28,6 +28,7 @@ class CertificateForm
                     ->default(null),
                 FileUpload::make('file')
                     ->label('File Sertifikat')
+                    ->disk('public')
                     ->directory('certificates')
                     ->acceptedFileTypes(['application/pdf', 'image/jpeg', 'image/png', 'image/webp'])
                     ->downloadable()

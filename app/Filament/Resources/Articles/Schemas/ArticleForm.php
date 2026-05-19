@@ -21,6 +21,7 @@ class ArticleForm
                     ->required(),
                 FileUpload::make('thumbnail')
                     ->label('Thumbnail')
+                    ->disk('public')
                     ->image()
                     ->directory('articles')
                     ->imageEditor()

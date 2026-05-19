@@ -26,6 +26,7 @@ class AnnouncementForm
                     ->columnSpanFull(),
                 FileUpload::make('attachment')
                     ->label('Lampiran')
+                    ->disk('public')
                     ->directory('announcements')
                     ->downloadable()
                     ->openable()

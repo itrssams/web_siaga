@@ -16,6 +16,7 @@ class DoctorForm
             ->components([
                 FileUpload::make('photo')
                     ->label('Foto')
+                    ->disk('public')
                     ->image()
                     ->directory('doctors')
                     ->imageEditor()
