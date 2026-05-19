@@ -21,7 +21,7 @@
         </div>
     </section>
 
-    <section id="layanan" class="-mt-1 border-y border-[var(--color-border)] bg-[#F8FAF8]">
+    <section id="layanan" class="-mt-1 border-y border-[var(--color-border)] bg-[var(--color-primary-soft)]">
         <div class="public-container grid gap-4 py-6 sm:grid-cols-2 lg:grid-cols-5">
             @foreach ([
                 ['icon' => 'D', 'title' => 'Dokter Kami', 'href' => '#dokter'],

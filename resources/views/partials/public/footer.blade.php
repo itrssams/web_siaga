@@ -1,4 +1,4 @@
-<footer class="border-t border-[var(--color-border)] bg-[#0F2419] text-white">
+<footer class="border-t border-[var(--color-border)] bg-[var(--color-primary-strong)] text-white">
     @php
         $logoPath = 'images/logo-rssams.png';
         $hasLogo = file_exists(public_path($logoPath));
