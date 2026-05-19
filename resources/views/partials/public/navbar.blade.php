@@ -3,12 +3,12 @@
     $hasLogo = file_exists(public_path($logoPath));
     $links = [
         ['label' => 'Beranda', 'href' => route('home')],
-        ['label' => 'Pelayanan', 'href' => '#layanan'],
-        ['label' => 'Dokter Kami', 'href' => '#dokter'],
-        ['label' => 'Artikel', 'href' => '#artikel'],
-        ['label' => 'Pengumuman', 'href' => '#pengumuman'],
-        ['label' => 'Sertifikat', 'href' => '#sertifikat'],
-        ['label' => 'Tentang Kami', 'href' => '#profil'],
+        ['label' => 'Pelayanan', 'href' => route('home') . '#layanan'],
+        ['label' => 'Dokter Kami', 'href' => route('doctors.index')],
+        ['label' => 'Artikel', 'href' => route('home') . '#artikel'],
+        ['label' => 'Pengumuman', 'href' => route('home') . '#pengumuman'],
+        ['label' => 'Sertifikat', 'href' => route('home') . '#sertifikat'],
+        ['label' => 'Tentang Kami', 'href' => route('home') . '#profil'],
     ];
 @endphp
 

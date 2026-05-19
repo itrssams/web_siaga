@@ -6,6 +6,7 @@ use App\Models\Certificate;
 use App\Models\Doctor;
 use App\Models\Polyclinic;
 use App\Models\Specialization;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
@@ -23,29 +24,11 @@ Route::get('/', function () {
         ->limit(3)
         ->get() : collect();
 
-    $doctors = Schema::hasTable('doctors') ? Doctor::query()
-        ->with(['specialization', 'polyclinic'])
-        ->latest()
-        ->limit(4)
-        ->get() : collect();
-
     $certificates = Schema::hasTable('certificates') ? Certificate::query()
         ->where('is_active', true)
         ->orderBy('sort_order')
         ->latest()
         ->limit(4)
-        ->get() : collect();
-
-    $specializations = Schema::hasTable('specializations') ? Specialization::query()
-        ->where('is_active', true)
-        ->orderBy('sort_order')
-        ->orderBy('name')
-        ->get() : collect();
-
-    $polyclinics = Schema::hasTable('polyclinics') ? Polyclinic::query()
-        ->where('is_active', true)
-        ->orderBy('sort_order')
-        ->orderBy('name')
         ->get() : collect();
 
     $stats = [
@@ -58,10 +41,38 @@ Route::get('/', function () {
     return view('home', compact(
         'announcements',
         'articles',
-        'doctors',
         'certificates',
-        'specializations',
-        'polyclinics',
         'stats',
     ));
 })->name('home');
+
+Route::get('/dokter', function (Request $request) {
+    $specializations = Schema::hasTable('specializations') ? Specialization::query()
+        ->where('is_active', true)
+        ->orderBy('sort_order')
+        ->orderBy('name')
+        ->get() : collect();
+
+    $polyclinics = Schema::hasTable('polyclinics') ? Polyclinic::query()
+        ->where('is_active', true)
+        ->orderBy('sort_order')
+        ->orderBy('name')
+        ->get() : collect();
+
+    $doctors = Schema::hasTable('doctors') ? Doctor::query()
+        ->with(['specialization', 'polyclinic'])
+        ->when($request->filled('search'), function ($query) use ($request): void {
+            $query->where('name', 'like', '%'.$request->string('search')->toString().'%');
+        })
+        ->when($request->filled('specialization_id'), function ($query) use ($request): void {
+            $query->where('specialization_id', $request->integer('specialization_id'));
+        })
+        ->when($request->filled('polyclinic_id'), function ($query) use ($request): void {
+            $query->where('polyclinic_id', $request->integer('polyclinic_id'));
+        })
+        ->latest()
+        ->paginate(12)
+        ->withQueryString() : collect();
+
+    return view('doctors.index', compact('doctors', 'specializations', 'polyclinics'));
+})->name('doctors.index');

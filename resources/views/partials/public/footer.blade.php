@@ -25,9 +25,9 @@
         <div>
             <p class="mb-3 font-bold">Navigasi</p>
             <div class="grid gap-2 text-sm text-white/70">
-                <a href="#dokter" class="hover:text-white">Dokter</a>
-                <a href="#pengumuman" class="hover:text-white">Pengumuman</a>
-                <a href="#artikel" class="hover:text-white">Artikel</a>
+                <a href="{{ route('doctors.index') }}" class="hover:text-white">Dokter</a>
+                <a href="{{ route('home') }}#pengumuman" class="hover:text-white">Pengumuman</a>
+                <a href="{{ route('home') }}#artikel" class="hover:text-white">Artikel</a>
             </div>
         </div>
 

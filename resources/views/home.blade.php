@@ -10,8 +10,8 @@
                     Temukan informasi dokter, pengumuman resmi, artikel kesehatan, dan sertifikat rumah sakit secara cepat dan jelas.
                 </p>
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-                    <a href="#cari-dokter" class="public-btn-primary">Cari Dokter</a>
-                    <a href="#dokter" class="public-btn-outline">Lihat Dokter</a>
+                    <a href="{{ route('doctors.index') }}" class="public-btn-primary">Cari Dokter</a>
+                    <a href="#pengumuman" class="public-btn-outline">Lihat Informasi</a>
                 </div>
             </div>
 
@@ -24,7 +24,7 @@
     <section id="layanan" class="service-strip">
         <div class="public-container grid gap-4 py-7 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ([
-                ['icon' => 'heroicon-o-user-group', 'title' => 'Dokter Kami', 'href' => '#dokter'],
+                ['icon' => 'heroicon-o-user-group', 'title' => 'Dokter Kami', 'href' => route('doctors.index')],
                 ['icon' => 'heroicon-o-megaphone', 'title' => 'Pengumuman', 'href' => '#pengumuman'],
                 ['icon' => 'heroicon-o-newspaper', 'title' => 'Artikel', 'href' => '#artikel'],
                 ['icon' => 'heroicon-o-shield-check', 'title' => 'Sertifikat', 'href' => '#sertifikat'],
@@ -39,50 +39,6 @@
         </div>
     </section>
 
-    <section id="cari-dokter" class="public-section">
-        <div class="public-container grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-            <div>
-                <p class="public-eyebrow mb-3">Cari Dokter</p>
-                <h2 class="text-3xl font-extrabold">Temukan dokter berdasarkan spesialisasi dan poliklinik.</h2>
-                <p class="mt-4 leading-7 text-[var(--color-muted)]">
-                    Pilih dokter, spesialisasi, atau poliklinik untuk melihat informasi layanan yang sesuai.
-                </p>
-            </div>
-            <div class="public-card p-5">
-                <div class="grid gap-4 md:grid-cols-3">
-                    <label class="grid gap-2 text-sm font-bold">
-                        Nama Dokter
-                        <select class="form-control-public">
-                            <option>Semua Dokter</option>
-                            @foreach ($doctors as $doctor)
-                                <option>{{ $doctor->name }}</option>
-                            @endforeach
-                        </select>
-                    </label>
-                    <label class="grid gap-2 text-sm font-bold">
-                        Spesialisasi
-                        <select class="form-control-public">
-                            <option>Semua Spesialisasi</option>
-                            @foreach ($specializations as $specialization)
-                                <option>{{ $specialization->name }}</option>
-                            @endforeach
-                        </select>
-                    </label>
-                    <label class="grid gap-2 text-sm font-bold">
-                        Poliklinik
-                        <select class="form-control-public">
-                            <option>Semua Poliklinik</option>
-                            @foreach ($polyclinics as $polyclinic)
-                                <option>{{ $polyclinic->name }}</option>
-                            @endforeach
-                        </select>
-                    </label>
-                </div>
-                <button class="public-btn-primary mt-5 w-full md:w-auto" type="button">Cari Dokter</button>
-            </div>
-        </div>
-    </section>
-
     <section id="profil" class="bg-[var(--color-primary-strong)] py-10 text-white">
         <div class="public-container grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ($stats as $stat)
@@ -91,41 +47,6 @@
                     <p class="mt-2 text-sm font-bold text-white/75">{{ $stat['label'] }}</p>
                 </div>
             @endforeach
-        </div>
-    </section>
-
-    <section id="dokter" class="public-section">
-        <div class="public-container">
-            <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-                <div>
-                    <p class="public-eyebrow mb-3">Dokter Kami</p>
-                    <h2 class="text-3xl font-extrabold">Dokter terbaru</h2>
-                </div>
-                <a href="#cari-dokter" class="public-btn-outline text-sm">Cari Dokter</a>
-            </div>
-
-            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-                @forelse ($doctors as $doctor)
-                    <article class="public-card overflow-hidden">
-                        <div class="h-52 bg-[var(--color-primary-soft)]">
-                            @if ($doctor->photo)
-                                <img src="{{ asset('storage/' . $doctor->photo) }}" alt="{{ $doctor->name }}" class="h-full w-full object-cover">
-                            @else
-                                <div class="grid h-full place-items-center text-5xl font-extrabold text-[var(--color-primary)]/25">RS</div>
-                            @endif
-                        </div>
-                        <div class="p-5">
-                            <h3 class="font-extrabold">{{ $doctor->name }}</h3>
-                            <p class="mt-1 text-sm text-[var(--color-muted)]">{{ $doctor->specialization?->name ?? 'Spesialis belum diisi' }}</p>
-                            <p class="mt-3 inline-flex rounded-full bg-[var(--color-primary-soft)] px-3 py-1 text-xs font-bold text-[var(--color-primary)]">
-                                {{ $doctor->polyclinic?->name ?? 'Poliklinik belum diisi' }}
-                            </p>
-                        </div>
-                    </article>
-                @empty
-                    <div class="public-card col-span-full p-6 text-[var(--color-muted)]">Data dokter belum tersedia.</div>
-                @endforelse
-            </div>
         </div>
     </section>
 
