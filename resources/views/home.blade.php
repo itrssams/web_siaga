@@ -24,14 +24,16 @@
     <section id="layanan" class="-mt-1 border-y border-[var(--color-primary-strong)] bg-[var(--color-primary-strong)]">
         <div class="public-container grid gap-4 py-6 sm:grid-cols-2 lg:grid-cols-5">
             @foreach ([
-                ['icon' => 'D', 'title' => 'Dokter Kami', 'href' => '#dokter'],
-                ['icon' => 'J', 'title' => 'Jadwal Dokter', 'href' => '#jadwal'],
-                ['icon' => 'P', 'title' => 'Pengumuman', 'href' => '#pengumuman'],
-                ['icon' => 'A', 'title' => 'Artikel', 'href' => '#artikel'],
-                ['icon' => 'S', 'title' => 'Sertifikat', 'href' => '#sertifikat'],
+                ['icon' => 'heroicon-o-user-group', 'title' => 'Dokter Kami', 'href' => '#dokter'],
+                ['icon' => 'heroicon-o-calendar-days', 'title' => 'Jadwal Dokter', 'href' => '#jadwal'],
+                ['icon' => 'heroicon-o-megaphone', 'title' => 'Pengumuman', 'href' => '#pengumuman'],
+                ['icon' => 'heroicon-o-newspaper', 'title' => 'Artikel', 'href' => '#artikel'],
+                ['icon' => 'heroicon-o-shield-check', 'title' => 'Sertifikat', 'href' => '#sertifikat'],
             ] as $service)
                 <a href="{{ $service['href'] }}" class="public-card flex items-center gap-4 p-4">
-                    <span class="service-icon">{{ $service['icon'] }}</span>
+                    <span class="service-icon">
+                        @svg($service['icon'], 'h-6 w-6')
+                    </span>
                     <span class="font-extrabold">{{ $service['title'] }}</span>
                 </a>
             @endforeach
