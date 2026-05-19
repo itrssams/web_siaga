@@ -5,6 +5,8 @@ use App\Models\Article;
 use App\Models\Certificate;
 use App\Models\Doctor;
 use App\Models\DoctorSchedule;
+use App\Models\Polyclinic;
+use App\Models\Specialization;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
@@ -42,5 +44,33 @@ Route::get('/', function () {
         ->limit(4)
         ->get() : collect();
 
-    return view('home', compact('announcements', 'articles', 'doctors', 'schedules', 'certificates'));
+    $specializations = Schema::hasTable('specializations') ? Specialization::query()
+        ->where('is_active', true)
+        ->orderBy('sort_order')
+        ->orderBy('name')
+        ->get() : collect();
+
+    $polyclinics = Schema::hasTable('polyclinics') ? Polyclinic::query()
+        ->where('is_active', true)
+        ->orderBy('sort_order')
+        ->orderBy('name')
+        ->get() : collect();
+
+    $stats = [
+        ['value' => Schema::hasTable('polyclinics') ? Polyclinic::count() : 0, 'label' => 'Poliklinik'],
+        ['value' => Schema::hasTable('doctors') ? Doctor::count() : 0, 'label' => 'Dokter'],
+        ['value' => Schema::hasTable('specializations') ? Specialization::count() : 0, 'label' => 'Spesialis'],
+        ['value' => Schema::hasTable('certificates') ? Certificate::count() : 0, 'label' => 'Sertifikat'],
+    ];
+
+    return view('home', compact(
+        'announcements',
+        'articles',
+        'doctors',
+        'schedules',
+        'certificates',
+        'specializations',
+        'polyclinics',
+        'stats',
+    ));
 })->name('home');

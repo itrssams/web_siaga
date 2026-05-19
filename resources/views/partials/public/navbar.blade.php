@@ -1,22 +1,22 @@
 @php
     $links = [
         ['label' => 'Beranda', 'href' => route('home')],
-        ['label' => 'Profil', 'href' => '#profil'],
-        ['label' => 'Dokter', 'href' => '#dokter'],
-        ['label' => 'Jadwal Dokter', 'href' => '#jadwal'],
-        ['label' => 'Pengumuman', 'href' => '#pengumuman'],
+        ['label' => 'Pelayanan', 'href' => '#layanan'],
+        ['label' => 'Dokter Kami', 'href' => '#dokter'],
         ['label' => 'Artikel', 'href' => '#artikel'],
+        ['label' => 'Pengumuman', 'href' => '#pengumuman'],
         ['label' => 'Sertifikat', 'href' => '#sertifikat'],
+        ['label' => 'Tentang Kami', 'href' => '#profil'],
     ];
 @endphp
 
 <header class="sticky top-0 z-40 border-b border-[var(--color-border)] bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
     <div class="public-container flex min-h-20 items-center justify-between gap-6">
         <a href="{{ route('home') }}" class="flex items-center gap-3">
-            <span class="flex h-11 w-11 items-center justify-center rounded-md bg-[#14532D] text-lg font-extrabold text-white">RS</span>
+            <span class="flex h-12 w-12 items-center justify-center rounded-md bg-[#14532D] text-lg font-extrabold text-white">RS</span>
             <span class="leading-tight">
-                <span class="block text-base font-extrabold text-[#14532D]">RS Sams</span>
-                <span class="block text-xs font-semibold text-[var(--color-muted)]">Rumah Sakit Siaga</span>
+                <span class="block text-lg font-extrabold text-[#14532D]">RS Sams</span>
+                <span class="block text-xs font-semibold text-[var(--color-muted)]">Rumah Sakit Siaga Medika</span>
             </span>
         </a>
 
