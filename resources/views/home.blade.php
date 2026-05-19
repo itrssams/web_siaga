@@ -2,7 +2,7 @@
     <section class="bg-white">
         <div class="public-container grid gap-8 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-14">
             <div class="animate-rise">
-                <p class="public-eyebrow mb-4">Selamat Datang di RS Sams</p>
+                <p class="public-eyebrow mb-4">Selamat Datang di Rumah Sakit Siaga Al Munawwarah Samarinda</p>
                 <h1 class="max-w-3xl text-4xl font-extrabold leading-tight text-[var(--color-text)] sm:text-5xl">
                     Layanan kesehatan modern dengan sentuhan yang tenang dan personal.
                 </h1>

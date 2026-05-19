@@ -16,13 +16,13 @@
     <div class="public-container flex min-h-20 items-center justify-between gap-6">
         <a href="{{ route('home') }}" class="flex items-center gap-3">
             @if ($hasLogo)
-                <img src="{{ asset($logoPath) }}" alt="RS Sams" class="h-12 w-12 rounded-md object-contain">
+                <img src="{{ asset($logoPath) }}" alt="Rumah Sakit Siaga Al Munawwarah Samarinda" class="h-12 w-12 rounded-md object-contain">
             @else
                 <span class="flex h-12 w-12 items-center justify-center rounded-md bg-[var(--color-primary-strong)] text-lg font-extrabold text-white">RS</span>
             @endif
             <span class="leading-tight">
-                <span class="block text-lg font-extrabold text-[var(--color-primary-strong)]">RS Sams</span>
-                <span class="block text-xs font-semibold text-[var(--color-muted)]">Rumah Sakit Siaga Medika</span>
+                <span class="block text-lg font-extrabold text-[var(--color-primary-strong)]">RS Siaga Al Munawwarah</span>
+                <span class="block text-xs font-semibold text-[var(--color-muted)]">Samarinda</span>
             </span>
         </a>
 
