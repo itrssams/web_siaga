@@ -4,7 +4,6 @@ use App\Models\Announcement;
 use App\Models\Article;
 use App\Models\Certificate;
 use App\Models\Doctor;
-use App\Models\DoctorSchedule;
 use App\Models\Polyclinic;
 use App\Models\Specialization;
 use Illuminate\Support\Facades\Route;
@@ -28,13 +27,6 @@ Route::get('/', function () {
         ->with(['specialization', 'polyclinic'])
         ->latest()
         ->limit(4)
-        ->get() : collect();
-
-    $schedules = Schema::hasTable('doctor_schedules') ? DoctorSchedule::query()
-        ->with(['doctor.polyclinic', 'doctor.specialization'])
-        ->orderBy('day_of_week')
-        ->orderBy('start_time')
-        ->limit(5)
         ->get() : collect();
 
     $certificates = Schema::hasTable('certificates') ? Certificate::query()
@@ -67,7 +59,6 @@ Route::get('/', function () {
         'announcements',
         'articles',
         'doctors',
-        'schedules',
         'certificates',
         'specializations',
         'polyclinics',

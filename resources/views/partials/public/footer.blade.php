@@ -18,7 +18,7 @@
                 </div>
             </div>
             <p class="max-w-md text-sm leading-6 text-white/70">
-                Website profil resmi untuk informasi dokter, jadwal pelayanan, pengumuman, artikel kesehatan, dan sertifikat rumah sakit.
+                Website profil resmi untuk informasi dokter, pengumuman, artikel kesehatan, dan sertifikat rumah sakit.
             </p>
         </div>
 
@@ -26,7 +26,6 @@
             <p class="mb-3 font-bold">Navigasi</p>
             <div class="grid gap-2 text-sm text-white/70">
                 <a href="#dokter" class="hover:text-white">Dokter</a>
-                <a href="#jadwal" class="hover:text-white">Jadwal Dokter</a>
                 <a href="#pengumuman" class="hover:text-white">Pengumuman</a>
                 <a href="#artikel" class="hover:text-white">Artikel</a>
             </div>

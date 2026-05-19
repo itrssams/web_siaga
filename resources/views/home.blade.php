@@ -7,11 +7,11 @@
                     Layanan kesehatan modern dengan sentuhan yang tenang dan personal.
                 </h1>
                 <p class="mt-5 max-w-2xl text-base leading-7 text-[var(--color-muted)] sm:text-lg">
-                    Temukan dokter, jadwal praktik, pengumuman resmi, artikel kesehatan, dan informasi sertifikat rumah sakit secara cepat dan jelas.
+                    Temukan informasi dokter, pengumuman resmi, artikel kesehatan, dan sertifikat rumah sakit secara cepat dan jelas.
                 </p>
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                     <a href="#cari-dokter" class="public-btn-primary">Cari Dokter</a>
-                    <a href="#jadwal" class="public-btn-outline">Jadwal Hari Ini</a>
+                    <a href="#dokter" class="public-btn-outline">Lihat Dokter</a>
                 </div>
             </div>
 
@@ -22,10 +22,9 @@
     </section>
 
     <section id="layanan" class="service-strip">
-        <div class="public-container grid gap-4 py-7 sm:grid-cols-2 lg:grid-cols-5">
+        <div class="public-container grid gap-4 py-7 sm:grid-cols-2 lg:grid-cols-4">
             @foreach ([
                 ['icon' => 'heroicon-o-user-group', 'title' => 'Dokter Kami', 'href' => '#dokter'],
-                ['icon' => 'heroicon-o-calendar-days', 'title' => 'Jadwal Dokter', 'href' => '#jadwal'],
                 ['icon' => 'heroicon-o-megaphone', 'title' => 'Pengumuman', 'href' => '#pengumuman'],
                 ['icon' => 'heroicon-o-newspaper', 'title' => 'Artikel', 'href' => '#artikel'],
                 ['icon' => 'heroicon-o-shield-check', 'title' => 'Sertifikat', 'href' => '#sertifikat'],
@@ -46,7 +45,7 @@
                 <p class="public-eyebrow mb-3">Cari Dokter</p>
                 <h2 class="text-3xl font-extrabold">Temukan dokter berdasarkan spesialisasi dan poliklinik.</h2>
                 <p class="mt-4 leading-7 text-[var(--color-muted)]">
-                    Pilih dokter, spesialisasi, atau poliklinik untuk melihat ketersediaan jadwal yang sesuai.
+                    Pilih dokter, spesialisasi, atau poliklinik untuk melihat informasi layanan yang sesuai.
                 </p>
             </div>
             <div class="public-card p-5">
@@ -79,7 +78,7 @@
                         </select>
                     </label>
                 </div>
-                <button class="public-btn-primary mt-5 w-full md:w-auto" type="button">Cari Jadwal Dokter</button>
+                <button class="public-btn-primary mt-5 w-full md:w-auto" type="button">Cari Dokter</button>
             </div>
         </div>
     </section>
@@ -92,36 +91,6 @@
                     <p class="mt-2 text-sm font-bold text-white/75">{{ $stat['label'] }}</p>
                 </div>
             @endforeach
-        </div>
-    </section>
-
-    <section id="jadwal" class="public-section bg-white">
-        <div class="public-container grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-            <div>
-                <p class="public-eyebrow mb-3">Jadwal Dokter</p>
-                <h2 class="text-3xl font-extrabold">Jadwal praktik terbaru</h2>
-                <p class="mt-4 leading-7 text-[var(--color-muted)]">
-                    Lihat dokter, poliklinik, hari praktik, dan waktu layanan dalam format yang mudah dibaca.
-                </p>
-            </div>
-
-            <div class="public-card overflow-hidden">
-                <div class="grid divide-y divide-[var(--color-border)]">
-                    @forelse ($schedules as $schedule)
-                        <div class="grid gap-3 p-5 md:grid-cols-[1fr_0.8fr_0.7fr_auto] md:items-center">
-                            <div>
-                                <p class="font-extrabold">{{ $schedule->doctor?->name }}</p>
-                                <p class="text-sm text-[var(--color-muted)]">{{ $schedule->doctor?->specialization?->name }}</p>
-                            </div>
-                            <p class="text-sm font-bold text-[var(--color-primary)]">{{ $schedule->doctor?->polyclinic?->name }}</p>
-                            <p class="text-sm text-[var(--color-muted)]">{{ \App\Models\DoctorSchedule::DAYS[$schedule->day_of_week] ?? '-' }}</p>
-                            <p class="text-sm font-extrabold">{{ $schedule->start_time?->format('H:i') }} - {{ $schedule->end_time?->format('H:i') }}</p>
-                        </div>
-                    @empty
-                        <div class="p-6 text-[var(--color-muted)]">Jadwal dokter belum tersedia.</div>
-                    @endforelse
-                </div>
-            </div>
         </div>
     </section>
 
