@@ -21,8 +21,8 @@
         </div>
     </section>
 
-    <section id="layanan" class="-mt-1 border-y border-[var(--color-primary-strong)] bg-[var(--color-primary-strong)]">
-        <div class="public-container grid gap-4 py-6 sm:grid-cols-2 lg:grid-cols-5">
+    <section id="layanan" class="service-strip">
+        <div class="public-container grid gap-4 py-7 sm:grid-cols-2 lg:grid-cols-5">
             @foreach ([
                 ['icon' => 'heroicon-o-user-group', 'title' => 'Dokter Kami', 'href' => '#dokter'],
                 ['icon' => 'heroicon-o-calendar-days', 'title' => 'Jadwal Dokter', 'href' => '#jadwal'],
@@ -30,11 +30,11 @@
                 ['icon' => 'heroicon-o-newspaper', 'title' => 'Artikel', 'href' => '#artikel'],
                 ['icon' => 'heroicon-o-shield-check', 'title' => 'Sertifikat', 'href' => '#sertifikat'],
             ] as $service)
-                <a href="{{ $service['href'] }}" class="public-card flex items-center gap-4 p-4">
+                <a href="{{ $service['href'] }}" class="service-card">
                     <span class="service-icon">
                         @svg($service['icon'], 'h-6 w-6')
                     </span>
-                    <span class="font-extrabold">{{ $service['title'] }}</span>
+                    <span class="service-title">{{ $service['title'] }}</span>
                 </a>
             @endforeach
         </div>
