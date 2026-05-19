@@ -4,8 +4,12 @@
         $hasHeroImage = file_exists(public_path($heroImage));
     @endphp
 
-    <section class="hero-masthead {{ $hasHeroImage ? 'has-hero-image' : '' }}" @if ($hasHeroImage) style="background-image: linear-gradient(90deg, rgb(5 26 15 / 0.82), rgb(5 26 15 / 0.48) 48%, rgb(5 26 15 / 0.16)), url('{{ asset($heroImage) }}')" @endif>
-        <div class="public-container flex min-h-[calc(100svh-7.5rem)] items-center py-14 sm:min-h-[34rem] lg:min-h-[38rem]">
+    <section class="hero-masthead {{ $hasHeroImage ? 'has-hero-image' : '' }}">
+        @if ($hasHeroImage)
+            <img src="{{ asset($heroImage) }}" alt="Gedung Rumah Sakit Siaga Al Munawwarah Samarinda" class="hero-masthead-image">
+        @endif
+
+        <div class="public-container flex min-h-[clamp(28rem,calc(100svh-7.5rem),42rem)] items-center py-12 sm:py-14">
             <div class="max-w-3xl animate-rise">
                 <p class="hero-eyebrow mb-4">Selamat Datang di Rumah Sakit Siaga Al Munawwarah Samarinda</p>
                 <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
