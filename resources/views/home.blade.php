@@ -74,6 +74,9 @@
                         @endif
                         <h3 class="font-extrabold">{{ $announcement->title }}</h3>
                         <p class="mt-3 line-clamp-3 text-sm leading-6 text-[var(--color-muted)]">{{ $announcement->content }}</p>
+                        <a href="{{ route('announcements.show', $announcement) }}" class="mt-4 inline-flex text-sm font-extrabold text-[var(--color-primary)] hover:text-[var(--color-primary-strong)]">
+                            Baca Selengkapnya
+                        </a>
                     </article>
                 @empty
                     <div class="public-card col-span-full p-6 text-[var(--color-muted)]">Pengumuman belum tersedia.</div>

@@ -51,11 +51,16 @@
                         <h3 class="mt-3 text-xl font-extrabold text-[var(--color-primary-strong)]">{{ $announcement->title }}</h3>
                         <p class="mt-3 line-clamp-5 text-sm leading-6 text-[var(--color-muted)]">{{ $announcement->content }}</p>
 
-                        @if ($announcement->attachment)
-                            <a href="{{ asset('storage/' . $announcement->attachment) }}" target="_blank" class="mt-5 inline-flex text-sm font-extrabold text-[var(--color-primary)] hover:text-[var(--color-primary-strong)]">
-                                Buka Lampiran
+                        <div class="mt-5 flex flex-wrap gap-3">
+                            <a href="{{ route('announcements.show', $announcement) }}" class="inline-flex text-sm font-extrabold text-[var(--color-primary)] hover:text-[var(--color-primary-strong)]">
+                                Baca Selengkapnya
                             </a>
-                        @endif
+                            @if ($announcement->attachment)
+                                <a href="{{ asset('storage/' . $announcement->attachment) }}" target="_blank" class="inline-flex text-sm font-extrabold text-[var(--color-primary)] hover:text-[var(--color-primary-strong)]">
+                                    Buka Lampiran
+                                </a>
+                            @endif
+                        </div>
                     </article>
                 @empty
                     <div class="public-card col-span-full p-6 text-[var(--color-muted)]">Pengumuman belum tersedia.</div>

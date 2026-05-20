@@ -148,3 +148,16 @@ Route::get('/pengumuman', function (Request $request) {
 
     return view('announcements.index', compact('announcements'));
 })->name('announcements.index');
+
+Route::get('/pengumuman/{announcement:slug}', function (Announcement $announcement) {
+    abort_unless($announcement->is_published, 404);
+
+    $otherAnnouncements = Announcement::query()
+        ->where('is_published', true)
+        ->whereKeyNot($announcement->getKey())
+        ->latest('published_at')
+        ->limit(3)
+        ->get();
+
+    return view('announcements.show', compact('announcement', 'otherAnnouncements'));
+})->name('announcements.show');
