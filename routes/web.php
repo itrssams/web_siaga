@@ -128,3 +128,23 @@ Route::get('/jadwal-dokter', function (Request $request) {
 
     return view('schedules.index', compact('scheduleDoctors', 'doctors', 'specializations', 'polyclinics'));
 })->name('schedules.index');
+
+Route::get('/pengumuman', function (Request $request) {
+    $announcements = Schema::hasTable('announcements') ? Announcement::query()
+        ->where('is_published', true)
+        ->when($request->filled('search'), function ($query) use ($request): void {
+            $query->where(function ($query) use ($request): void {
+                $search = $request->string('search')->toString();
+
+                $query
+                    ->where('title', 'like', '%'.$search.'%')
+                    ->orWhere('content', 'like', '%'.$search.'%');
+            });
+        })
+        ->orderByDesc('is_pinned')
+        ->latest('published_at')
+        ->paginate(9)
+        ->withQueryString() : collect();
+
+    return view('announcements.index', compact('announcements'));
+})->name('announcements.index');

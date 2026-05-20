@@ -20,7 +20,7 @@
                 </p>
                 <div class="mt-8 flex flex-col gap-3 sm:flex-row">
                     <a href="{{ route('doctors.index') }}" class="public-btn-primary">Cari Dokter</a>
-                    <a href="#pengumuman" class="hero-btn-outline">Lihat Informasi</a>
+                    <a href="{{ route('announcements.index') }}" class="hero-btn-outline">Lihat Informasi</a>
                 </div>
             </div>
         </div>
@@ -31,7 +31,7 @@
             @foreach ([
                 ['icon' => 'heroicon-o-user-group', 'title' => 'Dokter Kami', 'href' => route('doctors.index')],
                 ['icon' => 'heroicon-o-calendar-days', 'title' => 'Jadwal Dokter', 'href' => route('schedules.index')],
-                ['icon' => 'heroicon-o-megaphone', 'title' => 'Pengumuman', 'href' => '#pengumuman'],
+                ['icon' => 'heroicon-o-megaphone', 'title' => 'Pengumuman', 'href' => route('announcements.index')],
                 ['icon' => 'heroicon-o-newspaper', 'title' => 'Artikel', 'href' => '#artikel'],
                 ['icon' => 'heroicon-o-shield-check', 'title' => 'Sertifikat', 'href' => '#sertifikat'],
             ] as $service)
@@ -60,7 +60,10 @@
         <div class="public-container">
             <div class="mb-8">
                 <p class="public-eyebrow mb-3">Pengumuman</p>
-                <h2 class="text-3xl font-extrabold">Informasi resmi terbaru</h2>
+                <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+                    <h2 class="text-3xl font-extrabold">Informasi resmi terbaru</h2>
+                    <a href="{{ route('announcements.index') }}" class="public-btn-outline text-sm">Lihat Semua</a>
+                </div>
             </div>
 
             <div class="grid gap-4 lg:grid-cols-3">

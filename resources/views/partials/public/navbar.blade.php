@@ -7,7 +7,7 @@
         ['label' => 'Dokter Kami', 'href' => route('doctors.index')],
         ['label' => 'Jadwal Dokter', 'href' => route('schedules.index')],
         ['label' => 'Artikel', 'href' => route('home') . '#artikel'],
-        ['label' => 'Pengumuman', 'href' => route('home') . '#pengumuman'],
+        ['label' => 'Pengumuman', 'href' => route('announcements.index')],
         ['label' => 'Sertifikat', 'href' => route('home') . '#sertifikat'],
         ['label' => 'Tentang Kami', 'href' => route('home') . '#profil'],
     ];
