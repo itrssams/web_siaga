@@ -68,7 +68,7 @@
         </div>
     </section>
 
-    <section class="public-section">
+    <section class="public-section bg-[linear-gradient(180deg,#ffffff_0%,#fff7e0_48%,#ffffff_100%)]">
         <div class="public-container">
             <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
                 <div>
@@ -78,12 +78,13 @@
                 <a href="{{ route('home') }}" class="public-btn-outline text-sm">Kembali ke Beranda</a>
             </div>
 
-            <div class="grid">
+            <div class="grid gap-6">
                 @forelse ($scheduleDoctors as $doctor)
-                    <article class="border-b border-[var(--color-accent)]/30 py-8 first:pt-0 last:border-b-0">
-                        <div class="grid gap-6 lg:grid-cols-[16rem_1fr] lg:items-start">
-                            <aside class="flex justify-center lg:pt-8">
-                                <div class="h-32 w-32 overflow-hidden rounded-full bg-[var(--color-primary-soft)] shadow-[0_18px_44px_rgb(15_63_38_/_0.14)] ring-4 ring-white">
+                    <article class="relative overflow-hidden rounded-lg border border-white/70 bg-white/78 p-5 shadow-[0_28px_80px_rgb(15_32_51_/_0.12)] backdrop-blur-xl before:absolute before:inset-0 before:-z-10 before:bg-[linear-gradient(135deg,rgb(255_255_255_/_0.88),rgb(255_247_224_/_0.72)_52%,rgb(24_90_52_/_0.08))] lg:p-6">
+                        <div class="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-[var(--color-accent)]/16"></div>
+                        <div class="relative grid gap-6 lg:grid-cols-[16rem_1fr] lg:items-start">
+                            <aside class="flex justify-center lg:pt-7">
+                                <div class="h-32 w-32 overflow-hidden rounded-full bg-[var(--color-primary-soft)] shadow-[0_18px_44px_rgb(15_63_38_/_0.16)] ring-4 ring-white">
                                     @if ($doctor->photo)
                                         <img src="{{ asset('storage/' . $doctor->photo) }}" alt="{{ $doctor->name }}" class="h-full w-full object-cover">
                                     @else
@@ -99,8 +100,8 @@
                                     <p class="mt-1 text-sm font-bold text-[var(--color-muted)]">{{ $doctor->specialization?->name ?? 'Spesialis belum diisi' }}</p>
                                 </div>
 
-                                <div class="overflow-x-auto">
-                                    <table class="w-full min-w-[820px] table-fixed border-collapse bg-white text-center">
+                                <div class="overflow-x-auto rounded-md border border-[var(--color-border)] bg-white/86 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.70)]">
+                                    <table class="w-full min-w-[820px] table-fixed border-collapse text-center">
                                         <thead class="text-base font-extrabold text-[var(--color-text)]">
                                             <tr>
                                                 @foreach (\App\Models\DoctorSchedule::DAYS as $dayName)
@@ -138,9 +139,6 @@
                                 <div class="mt-4 flex flex-wrap gap-2">
                                     <a href="{{ route('doctors.index', ['search' => $doctor->name]) }}" class="inline-flex min-h-8 items-center justify-center rounded-md bg-[var(--color-primary)] px-4 text-sm font-extrabold text-white transition hover:bg-[var(--color-primary-strong)]">
                                         View Detail
-                                    </a>
-                                    <a href="#" class="inline-flex min-h-8 items-center justify-center rounded-md bg-[var(--color-accent)] px-4 text-sm font-extrabold text-[var(--color-primary-strong)] transition hover:bg-[#f4cf59]">
-                                        Reservasi Online
                                     </a>
                                 </div>
                             </div>
