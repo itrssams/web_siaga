@@ -5,6 +5,7 @@
         ['label' => 'Beranda', 'href' => route('home')],
         ['label' => 'Pelayanan', 'href' => route('home') . '#layanan'],
         ['label' => 'Dokter Kami', 'href' => route('doctors.index')],
+        ['label' => 'Jadwal Dokter', 'href' => route('schedules.index')],
         ['label' => 'Artikel', 'href' => route('home') . '#artikel'],
         ['label' => 'Pengumuman', 'href' => route('home') . '#pengumuman'],
         ['label' => 'Sertifikat', 'href' => route('home') . '#sertifikat'],

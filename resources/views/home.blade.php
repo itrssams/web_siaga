@@ -27,9 +27,10 @@
     </section>
 
     <section id="layanan" class="service-strip">
-        <div class="public-container grid gap-4 py-7 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="public-container grid gap-4 py-7 sm:grid-cols-2 lg:grid-cols-5">
             @foreach ([
                 ['icon' => 'heroicon-o-user-group', 'title' => 'Dokter Kami', 'href' => route('doctors.index')],
+                ['icon' => 'heroicon-o-calendar-days', 'title' => 'Jadwal Dokter', 'href' => route('schedules.index')],
                 ['icon' => 'heroicon-o-megaphone', 'title' => 'Pengumuman', 'href' => '#pengumuman'],
                 ['icon' => 'heroicon-o-newspaper', 'title' => 'Artikel', 'href' => '#artikel'],
                 ['icon' => 'heroicon-o-shield-check', 'title' => 'Sertifikat', 'href' => '#sertifikat'],
