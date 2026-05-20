@@ -4,7 +4,6 @@ use App\Models\Announcement;
 use App\Models\Article;
 use App\Models\Certificate;
 use App\Models\Doctor;
-use App\Models\DoctorSchedule;
 use App\Models\Polyclinic;
 use App\Models\Specialization;
 use Illuminate\Http\Request;
@@ -95,26 +94,37 @@ Route::get('/jadwal-dokter', function (Request $request) {
         ->orderBy('name')
         ->get() : collect();
 
-    $schedules = Schema::hasTable('doctor_schedules') ? DoctorSchedule::query()
-        ->with(['doctor.specialization', 'doctor.polyclinic'])
-        ->where('is_active', true)
+    $scheduleDoctors = Schema::hasTable('doctor_schedules') ? Doctor::query()
+        ->with(['specialization', 'polyclinic'])
+        ->with(['schedules' => function ($query) use ($request): void {
+            $query
+                ->where('is_active', true)
+                ->when($request->filled('day_of_week'), function ($query) use ($request): void {
+                    $query->where('day_of_week', $request->integer('day_of_week'));
+                })
+                ->orderBy('day_of_week')
+                ->orderBy('start_time')
+                ->orderBy('sort_order');
+        }])
+        ->whereHas('schedules', function ($query) use ($request): void {
+            $query
+                ->where('is_active', true)
+                ->when($request->filled('day_of_week'), function ($query) use ($request): void {
+                    $query->where('day_of_week', $request->integer('day_of_week'));
+                });
+        })
         ->when($request->filled('doctor_id'), function ($query) use ($request): void {
-            $query->where('doctor_id', $request->integer('doctor_id'));
+            $query->whereKey($request->integer('doctor_id'));
         })
         ->when($request->filled('specialization_id'), function ($query) use ($request): void {
-            $query->whereHas('doctor', fn ($doctorQuery) => $doctorQuery->where('specialization_id', $request->integer('specialization_id')));
+            $query->where('specialization_id', $request->integer('specialization_id'));
         })
         ->when($request->filled('polyclinic_id'), function ($query) use ($request): void {
-            $query->whereHas('doctor', fn ($doctorQuery) => $doctorQuery->where('polyclinic_id', $request->integer('polyclinic_id')));
+            $query->where('polyclinic_id', $request->integer('polyclinic_id'));
         })
-        ->when($request->filled('day_of_week'), function ($query) use ($request): void {
-            $query->where('day_of_week', $request->integer('day_of_week'));
-        })
-        ->orderBy('day_of_week')
-        ->orderBy('start_time')
-        ->orderBy('sort_order')
-        ->paginate(12)
+        ->orderBy('name')
+        ->paginate(8)
         ->withQueryString() : collect();
 
-    return view('schedules.index', compact('schedules', 'doctors', 'specializations', 'polyclinics'));
+    return view('schedules.index', compact('scheduleDoctors', 'doctors', 'specializations', 'polyclinics'));
 })->name('schedules.index');
