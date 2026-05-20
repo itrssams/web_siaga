@@ -216,3 +216,5 @@ Route::get('/sertifikat', function (Request $request) {
 
     return view('certificates.index', compact('certificates'));
 })->name('certificates.index');
+
+Route::view('/tentang-kami', 'about')->name('about');

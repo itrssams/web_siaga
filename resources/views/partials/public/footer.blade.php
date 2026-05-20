@@ -30,6 +30,7 @@
                 <a href="{{ route('announcements.index') }}" class="hover:text-white">Pengumuman</a>
                 <a href="{{ route('articles.index') }}" class="hover:text-white">Artikel</a>
                 <a href="{{ route('certificates.index') }}" class="hover:text-white">Sertifikat</a>
+                <a href="{{ route('about') }}" class="hover:text-white">Tentang Kami</a>
             </div>
         </div>
 

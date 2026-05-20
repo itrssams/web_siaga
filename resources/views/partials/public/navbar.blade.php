@@ -9,7 +9,7 @@
         ['label' => 'Artikel', 'href' => route('articles.index')],
         ['label' => 'Pengumuman', 'href' => route('announcements.index')],
         ['label' => 'Sertifikat', 'href' => route('certificates.index')],
-        ['label' => 'Tentang Kami', 'href' => route('home') . '#profil'],
+        ['label' => 'Tentang Kami', 'href' => route('about')],
     ];
 @endphp
 
