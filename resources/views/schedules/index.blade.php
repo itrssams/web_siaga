@@ -80,53 +80,67 @@
 
             <div class="grid gap-5">
                 @forelse ($scheduleDoctors as $doctor)
-                    <article class="public-card overflow-hidden">
-                        <div class="grid gap-4 border-b border-[var(--color-border)] p-5 md:grid-cols-[auto_1fr_auto] md:items-center">
-                            <div class="h-20 w-20 overflow-hidden rounded-md bg-[var(--color-primary-soft)]">
-                                @if ($doctor->photo)
-                                    <img src="{{ asset('storage/' . $doctor->photo) }}" alt="{{ $doctor->name }}" class="h-full w-full object-cover">
-                                @else
-                                    <div class="grid h-full place-items-center text-xl font-extrabold text-[var(--color-primary)]/35">RS</div>
-                                @endif
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-extrabold">{{ $doctor->name }}</h3>
-                                <p class="mt-1 text-sm text-[var(--color-muted)]">{{ $doctor->specialization?->name ?? 'Spesialis belum diisi' }}</p>
-                                <p class="mt-3 inline-flex rounded-full bg-[var(--color-primary-soft)] px-3 py-1 text-xs font-bold text-[var(--color-primary)]">
-                                    {{ $doctor->polyclinic?->name ?? 'Poliklinik belum diisi' }}
-                                </p>
-                            </div>
-                            <a href="{{ route('doctors.index', ['search' => $doctor->name]) }}" class="public-btn-outline text-sm">Detail Dokter</a>
-                        </div>
-
-                        <div class="overflow-x-auto">
-                            <div class="min-w-[760px]">
-                                <div class="grid grid-cols-7 border-b border-[var(--color-border)] bg-[var(--color-primary-strong)] text-center text-xs font-extrabold uppercase text-white">
-                                    @foreach (\App\Models\DoctorSchedule::DAYS as $dayName)
-                                        <div class="border-r border-white/10 px-3 py-3 last:border-r-0">{{ $dayName }}</div>
-                                    @endforeach
+                    <article class="public-card overflow-hidden bg-white">
+                        <div class="grid gap-6 p-5 lg:grid-cols-[13rem_1fr] lg:p-6">
+                            <aside class="flex flex-col items-center justify-center rounded-md border border-[var(--color-border)] bg-gradient-to-b from-white to-[var(--color-primary-soft)] px-5 py-6 text-center">
+                                <div class="h-32 w-32 overflow-hidden rounded-full border-4 border-white bg-[var(--color-primary-soft)] shadow-[0_18px_44px_rgb(15_63_38_/_0.16)]">
+                                    @if ($doctor->photo)
+                                        <img src="{{ asset('storage/' . $doctor->photo) }}" alt="{{ $doctor->name }}" class="h-full w-full object-cover">
+                                    @else
+                                        <div class="grid h-full place-items-center text-4xl font-extrabold text-[var(--color-primary)]/30">RS</div>
+                                    @endif
                                 </div>
-                                <div class="grid grid-cols-7 bg-white text-center">
-                                    @foreach (\App\Models\DoctorSchedule::DAYS as $dayNumber => $dayName)
-                                        @php
-                                            $daySchedules = $doctor->schedules->where('day_of_week', $dayNumber);
-                                        @endphp
+                                <p class="mt-4 text-xs font-bold uppercase text-[var(--color-muted)]">Dokter</p>
+                                <a href="{{ route('doctors.index', ['search' => $doctor->name]) }}" class="mt-3 text-sm font-extrabold text-[var(--color-primary)] hover:text-[var(--color-primary-strong)]">
+                                    Lihat Profil
+                                </a>
+                            </aside>
 
-                                        <div class="min-h-28 border-r border-[var(--color-border)] px-3 py-4 last:border-r-0">
-                                            @forelse ($daySchedules as $schedule)
-                                                <div class="mb-2 rounded-md border border-[var(--color-border)] bg-[var(--color-primary-soft)] px-2 py-2 last:mb-0">
-                                                    <p class="whitespace-nowrap text-sm font-extrabold text-[var(--color-primary)]">
-                                                        {{ $schedule->start_time?->format('H:i') }} - {{ $schedule->end_time?->format('H:i') }}
-                                                    </p>
-                                                    @if ($schedule->note)
-                                                        <p class="mt-1 text-xs leading-5 text-[var(--color-muted)]">{{ $schedule->note }}</p>
-                                                    @endif
-                                                </div>
-                                            @empty
-                                                <span class="inline-flex h-full min-h-16 items-center text-sm font-bold text-[var(--color-muted)]/60">-</span>
-                                            @endforelse
-                                        </div>
-                                    @endforeach
+                            <div class="min-w-0">
+                                <div class="mb-5 flex flex-col justify-between gap-3 border-b border-[var(--color-border)] pb-5 md:flex-row md:items-start">
+                                    <div>
+                                        <h3 class="text-2xl font-extrabold text-[var(--color-primary-strong)]">{{ $doctor->name }}</h3>
+                                        <p class="mt-1 text-sm font-bold text-[var(--color-muted)]">{{ $doctor->specialization?->name ?? 'Spesialis belum diisi' }}</p>
+                                    </div>
+                                    <p class="inline-flex w-fit rounded-full bg-[var(--color-primary-soft)] px-3 py-1 text-xs font-bold text-[var(--color-primary)]">
+                                        {{ $doctor->polyclinic?->name ?? 'Poliklinik belum diisi' }}
+                                    </p>
+                                </div>
+
+                                <div class="overflow-x-auto rounded-md border border-[var(--color-border)]">
+                                    <table class="min-w-[820px] w-full border-collapse bg-white text-center">
+                                        <thead class="bg-[var(--color-primary-strong)] text-xs font-extrabold uppercase text-white">
+                                            <tr>
+                                                @foreach (\App\Models\DoctorSchedule::DAYS as $dayName)
+                                                    <th class="border-r border-white/10 px-3 py-3 last:border-r-0">{{ $dayName }}</th>
+                                                @endforeach
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @foreach (\App\Models\DoctorSchedule::DAYS as $dayNumber => $dayName)
+                                                    @php
+                                                        $daySchedules = $doctor->schedules->where('day_of_week', $dayNumber);
+                                                    @endphp
+
+                                                    <td class="min-h-28 border-r border-[var(--color-border)] px-3 py-4 align-top last:border-r-0">
+                                                        @forelse ($daySchedules as $schedule)
+                                                            <div class="mx-auto mb-2 rounded-md border border-[var(--color-accent)]/30 bg-[var(--color-primary-soft)] px-2 py-2 last:mb-0">
+                                                                <p class="whitespace-nowrap text-sm font-extrabold text-[var(--color-primary)]">
+                                                                    {{ $schedule->start_time?->format('H:i') }} - {{ $schedule->end_time?->format('H:i') }}
+                                                                </p>
+                                                                @if ($schedule->note)
+                                                                    <p class="mt-1 text-xs leading-5 text-[var(--color-muted)]">{{ $schedule->note }}</p>
+                                                                @endif
+                                                            </div>
+                                                        @empty
+                                                            <span class="inline-flex min-h-16 items-center text-sm font-bold text-[var(--color-muted)]/60">-</span>
+                                                        @endforelse
+                                                    </td>
+                                                @endforeach
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
