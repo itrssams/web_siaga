@@ -8,6 +8,7 @@ use App\Models\Certificate;
 use App\Models\Doctor;
 use App\Models\DoctorSchedule;
 use App\Models\Polyclinic;
+use App\Models\SiteSetting;
 use App\Models\Specialization;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -136,6 +137,20 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Sertifikat Keselamatan dan Kesehatan Kerja', 'certificate_number' => 'RSSAMS-K3-2026', 'issuer' => 'Instansi Terkait', 'file' => 'certificates/demo-k3.pdf', 'issued_at' => Carbon::parse('2026-03-10'), 'expires_at' => Carbon::parse('2028-03-10'), 'sort_order' => 3],
         ])->each(fn (array $data): Certificate => Certificate::query()->updateOrCreate(
             ['name' => $data['name']],
+            $data + ['is_active' => true],
+        ));
+
+        collect([
+            ['key' => 'emergency_phone', 'label' => 'IGD 24 Jam', 'value' => '0812 0000 0000', 'url' => 'tel:081200000000', 'placement' => 'topbar_left', 'sort_order' => 1],
+            ['key' => 'ambulance_phone', 'label' => 'Ambulans', 'value' => '0812 1111 1111', 'url' => 'tel:081211111111', 'placement' => 'topbar_left', 'sort_order' => 2],
+            ['key' => 'main_phone', 'label' => 'Telp', 'value' => '(0000) 000000', 'url' => 'tel:0000000000', 'placement' => 'topbar_right', 'sort_order' => 1],
+            ['key' => 'main_email', 'label' => 'Email', 'value' => 'info@rssams.test', 'url' => 'mailto:info@rssams.test', 'placement' => 'topbar_right', 'sort_order' => 2],
+            ['key' => 'footer_phone', 'label' => 'Telp', 'value' => '(0000) 000000', 'url' => 'tel:0000000000', 'placement' => 'footer_contact', 'sort_order' => 1],
+            ['key' => 'footer_email', 'label' => 'Email', 'value' => 'info@rssams.test', 'url' => 'mailto:info@rssams.test', 'placement' => 'footer_contact', 'sort_order' => 2],
+            ['key' => 'footer_address', 'label' => 'Alamat', 'value' => 'Samarinda, Kalimantan Timur', 'url' => null, 'placement' => 'footer_contact', 'sort_order' => 3],
+            ['key' => 'footer_hours', 'label' => 'Jam Layanan', 'value' => 'Senin - Sabtu sesuai jadwal layanan', 'url' => null, 'placement' => 'footer_contact', 'sort_order' => 4],
+        ])->each(fn (array $data): SiteSetting => SiteSetting::query()->updateOrCreate(
+            ['key' => $data['key']],
             $data + ['is_active' => true],
         ));
     }

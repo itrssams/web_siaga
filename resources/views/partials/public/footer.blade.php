@@ -2,6 +2,17 @@
     @php
         $logoPath = 'images/logo-rssams.png';
         $hasLogo = file_exists(public_path($logoPath));
+        $footerContacts = \Illuminate\Support\Facades\Schema::hasTable('site_settings')
+            ? \App\Models\SiteSetting::activeFor('footer_contact')
+            : collect();
+
+        if ($footerContacts->isEmpty()) {
+            $footerContacts = collect([
+                (object) ['label' => 'Telp', 'value' => '(0000) 000000', 'url' => null],
+                (object) ['label' => 'Email', 'value' => 'info@rssams.test', 'url' => null],
+                (object) ['label' => 'Alamat', 'value' => 'Alamat rumah sakit dapat disesuaikan.', 'url' => null],
+            ]);
+        }
     @endphp
 
     <div class="public-container grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
@@ -37,9 +48,13 @@
         <div>
             <p class="mb-3 font-bold">Kontak</p>
             <div class="grid gap-2 text-sm text-white/70">
-                <span>Telp. (0000) 000000</span>
-                <span>Email: info@rssams.test</span>
-                <span>Alamat rumah sakit dapat disesuaikan.</span>
+                @foreach ($footerContacts as $item)
+                    @if ($item->url)
+                        <a href="{{ $item->url }}" class="hover:text-white">{{ $item->label }}: {{ $item->value }}</a>
+                    @else
+                        <span>{{ $item->label }}: {{ $item->value }}</span>
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>
