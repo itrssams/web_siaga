@@ -34,5 +34,24 @@
         </nav>
 
         <a href="{{ url('/admin') }}" class="public-btn-outline hidden text-sm lg:inline-flex">Admin</a>
+
+        <details class="mobile-menu relative lg:hidden">
+            <summary class="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-md border border-[var(--color-border)] text-[var(--color-primary-strong)] transition hover:border-[var(--color-primary)] hover:bg-[var(--color-primary-soft)]">
+                <span class="sr-only">Buka menu navigasi</span>
+                @svg('heroicon-o-bars-3', 'h-6 w-6 mobile-menu-open-icon')
+                @svg('heroicon-o-x-mark', 'h-6 w-6 mobile-menu-close-icon')
+            </summary>
+
+            <div class="absolute right-0 top-14 w-[min(20rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-[var(--color-border)] bg-white shadow-[0_24px_70px_rgb(15_32_51_/_0.16)]">
+                <nav class="grid p-2 text-sm font-bold text-[var(--color-muted)]">
+                    @foreach ($links as $link)
+                        <a href="{{ $link['href'] }}" class="rounded-md px-4 py-3 transition hover:bg-[var(--color-primary-soft)] hover:text-[var(--color-primary-strong)]">{{ $link['label'] }}</a>
+                    @endforeach
+                </nav>
+                <div class="border-t border-[var(--color-border)] p-3">
+                    <a href="{{ url('/admin') }}" class="public-btn-outline w-full text-sm">Admin</a>
+                </div>
+            </div>
+        </details>
     </div>
 </header>

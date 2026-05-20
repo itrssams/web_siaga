@@ -102,6 +102,22 @@ body {
     text-transform: uppercase;
 }
 
+.mobile-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.mobile-menu-close-icon {
+    display: none;
+}
+
+.mobile-menu[open] .mobile-menu-open-icon {
+    display: none;
+}
+
+.mobile-menu[open] .mobile-menu-close-icon {
+    display: block;
+}
+
 .hero-masthead {
     position: relative;
     isolation: isolate;
