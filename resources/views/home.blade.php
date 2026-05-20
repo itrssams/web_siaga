@@ -93,6 +93,7 @@
                 <p class="mt-4 leading-7 text-[var(--color-muted)]">
                     Baca informasi kesehatan, aktivitas rumah sakit, dan kabar terbaru untuk pasien serta keluarga.
                 </p>
+                <a href="{{ route('articles.index') }}" class="public-btn-outline mt-6 text-sm">Lihat Semua Artikel</a>
             </div>
 
             <div class="grid gap-4 md:grid-cols-3">
@@ -106,6 +107,9 @@
                         <div class="p-4">
                             <h3 class="font-extrabold">{{ $article->title }}</h3>
                             <p class="mt-2 line-clamp-3 text-sm leading-6 text-[var(--color-muted)]">{{ $article->excerpt ?: $article->content }}</p>
+                            <a href="{{ route('articles.show', $article) }}" class="mt-4 inline-flex text-sm font-extrabold text-[var(--color-primary)] hover:text-[var(--color-primary-strong)]">
+                                Baca Selengkapnya
+                            </a>
                         </div>
                     </article>
                 @empty

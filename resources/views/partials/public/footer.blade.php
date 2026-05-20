@@ -28,7 +28,7 @@
                 <a href="{{ route('doctors.index') }}" class="hover:text-white">Dokter</a>
                 <a href="{{ route('schedules.index') }}" class="hover:text-white">Jadwal Dokter</a>
                 <a href="{{ route('announcements.index') }}" class="hover:text-white">Pengumuman</a>
-                <a href="{{ route('home') }}#artikel" class="hover:text-white">Artikel</a>
+                <a href="{{ route('articles.index') }}" class="hover:text-white">Artikel</a>
             </div>
         </div>
 

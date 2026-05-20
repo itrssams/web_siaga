@@ -161,3 +161,37 @@ Route::get('/pengumuman/{announcement:slug}', function (Announcement $announceme
 
     return view('announcements.show', compact('announcement', 'otherAnnouncements'));
 })->name('announcements.show');
+
+Route::get('/artikel', function (Request $request) {
+    $articles = Schema::hasTable('articles') ? Article::query()
+        ->where('is_published', true)
+        ->when($request->filled('search'), function ($query) use ($request): void {
+            $query->where(function ($query) use ($request): void {
+                $search = $request->string('search')->toString();
+
+                $query
+                    ->where('title', 'like', '%'.$search.'%')
+                    ->orWhere('excerpt', 'like', '%'.$search.'%')
+                    ->orWhere('content', 'like', '%'.$search.'%');
+            });
+        })
+        ->orderByDesc('is_featured')
+        ->latest('published_at')
+        ->paginate(9)
+        ->withQueryString() : collect();
+
+    return view('articles.index', compact('articles'));
+})->name('articles.index');
+
+Route::get('/artikel/{article:slug}', function (Article $article) {
+    abort_unless($article->is_published, 404);
+
+    $otherArticles = Article::query()
+        ->where('is_published', true)
+        ->whereKeyNot($article->getKey())
+        ->latest('published_at')
+        ->limit(3)
+        ->get();
+
+    return view('articles.show', compact('article', 'otherArticles'));
+})->name('articles.show');
