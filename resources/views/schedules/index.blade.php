@@ -78,41 +78,33 @@
                 <a href="{{ route('home') }}" class="public-btn-outline text-sm">Kembali ke Beranda</a>
             </div>
 
-            <div class="grid gap-5">
+            <div class="grid">
                 @forelse ($scheduleDoctors as $doctor)
-                    <article class="public-card overflow-hidden bg-white">
-                        <div class="grid gap-6 p-5 lg:grid-cols-[13rem_1fr] lg:p-6">
-                            <aside class="flex flex-col items-center justify-center rounded-md border border-[var(--color-border)] bg-gradient-to-b from-white to-[var(--color-primary-soft)] px-5 py-6 text-center">
-                                <div class="h-32 w-32 overflow-hidden rounded-full border-4 border-white bg-[var(--color-primary-soft)] shadow-[0_18px_44px_rgb(15_63_38_/_0.16)]">
+                    <article class="border-b border-[var(--color-accent)]/30 py-8 first:pt-0 last:border-b-0">
+                        <div class="grid gap-6 lg:grid-cols-[16rem_1fr] lg:items-start">
+                            <aside class="flex justify-center lg:pt-8">
+                                <div class="h-32 w-32 overflow-hidden rounded-full bg-[var(--color-primary-soft)] shadow-[0_18px_44px_rgb(15_63_38_/_0.14)] ring-4 ring-white">
                                     @if ($doctor->photo)
                                         <img src="{{ asset('storage/' . $doctor->photo) }}" alt="{{ $doctor->name }}" class="h-full w-full object-cover">
                                     @else
                                         <div class="grid h-full place-items-center text-4xl font-extrabold text-[var(--color-primary)]/30">RS</div>
                                     @endif
                                 </div>
-                                <p class="mt-4 text-xs font-bold uppercase text-[var(--color-muted)]">Dokter</p>
-                                <a href="{{ route('doctors.index', ['search' => $doctor->name]) }}" class="mt-3 text-sm font-extrabold text-[var(--color-primary)] hover:text-[var(--color-primary-strong)]">
-                                    Lihat Profil
-                                </a>
                             </aside>
 
                             <div class="min-w-0">
-                                <div class="mb-5 flex flex-col justify-between gap-3 border-b border-[var(--color-border)] pb-5 md:flex-row md:items-start">
-                                    <div>
-                                        <h3 class="text-2xl font-extrabold text-[var(--color-primary-strong)]">{{ $doctor->name }}</h3>
-                                        <p class="mt-1 text-sm font-bold text-[var(--color-muted)]">{{ $doctor->specialization?->name ?? 'Spesialis belum diisi' }}</p>
-                                    </div>
-                                    <p class="inline-flex w-fit rounded-full bg-[var(--color-primary-soft)] px-3 py-1 text-xs font-bold text-[var(--color-primary)]">
-                                        {{ $doctor->polyclinic?->name ?? 'Poliklinik belum diisi' }}
-                                    </p>
+                                <div class="mb-3">
+                                    <h3 class="text-2xl font-extrabold leading-tight text-[var(--color-text)]">{{ $doctor->name }}</h3>
+                                    <p class="mt-1 text-base font-medium italic text-[var(--color-text)]">{{ $doctor->polyclinic?->name ?? 'Poliklinik belum diisi' }}</p>
+                                    <p class="mt-1 text-sm font-bold text-[var(--color-muted)]">{{ $doctor->specialization?->name ?? 'Spesialis belum diisi' }}</p>
                                 </div>
 
-                                <div class="overflow-x-auto rounded-md border border-[var(--color-border)]">
-                                    <table class="min-w-[820px] w-full border-collapse bg-white text-center">
-                                        <thead class="bg-[var(--color-primary-strong)] text-xs font-extrabold uppercase text-white">
+                                <div class="overflow-x-auto">
+                                    <table class="w-full min-w-[820px] table-fixed border-collapse bg-white text-center">
+                                        <thead class="text-base font-extrabold text-[var(--color-text)]">
                                             <tr>
                                                 @foreach (\App\Models\DoctorSchedule::DAYS as $dayName)
-                                                    <th class="border-r border-white/10 px-3 py-3 last:border-r-0">{{ $dayName }}</th>
+                                                    <th class="w-[14.285714%] border border-[var(--color-border)] px-3 py-2">{{ $dayName }}</th>
                                                 @endforeach
                                             </tr>
                                         </thead>
@@ -123,10 +115,10 @@
                                                         $daySchedules = $doctor->schedules->where('day_of_week', $dayNumber);
                                                     @endphp
 
-                                                    <td class="min-h-28 border-r border-[var(--color-border)] px-3 py-4 align-top last:border-r-0">
+                                                    <td class="w-[14.285714%] border border-[var(--color-border)] px-2 py-2 align-middle">
                                                         @forelse ($daySchedules as $schedule)
-                                                            <div class="mx-auto mb-2 rounded-md border border-[var(--color-accent)]/30 bg-[var(--color-primary-soft)] px-2 py-2 last:mb-0">
-                                                                <p class="whitespace-nowrap text-sm font-extrabold text-[var(--color-primary)]">
+                                                            <div class="mx-auto mb-1 last:mb-0">
+                                                                <p class="whitespace-nowrap text-sm font-extrabold text-[var(--color-text)]">
                                                                     {{ $schedule->start_time?->format('H:i') }} - {{ $schedule->end_time?->format('H:i') }}
                                                                 </p>
                                                                 @if ($schedule->note)
@@ -134,13 +126,22 @@
                                                                 @endif
                                                             </div>
                                                         @empty
-                                                            <span class="inline-flex min-h-16 items-center text-sm font-bold text-[var(--color-muted)]/60">-</span>
+                                                            <span class="text-sm font-extrabold text-[var(--color-muted)]">-</span>
                                                         @endforelse
                                                     </td>
                                                 @endforeach
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+
+                                <div class="mt-4 flex flex-wrap gap-2">
+                                    <a href="{{ route('doctors.index', ['search' => $doctor->name]) }}" class="inline-flex min-h-8 items-center justify-center rounded-md bg-[var(--color-primary)] px-4 text-sm font-extrabold text-white transition hover:bg-[var(--color-primary-strong)]">
+                                        View Detail
+                                    </a>
+                                    <a href="#" class="inline-flex min-h-8 items-center justify-center rounded-md bg-[var(--color-accent)] px-4 text-sm font-extrabold text-[var(--color-primary-strong)] transition hover:bg-[#f4cf59]">
+                                        Reservasi Online
+                                    </a>
                                 </div>
                             </div>
                         </div>
