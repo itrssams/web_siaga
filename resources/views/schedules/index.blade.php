@@ -80,13 +80,13 @@
 
             <div class="grid gap-6">
                 @forelse ($scheduleDoctors as $doctor)
-                    <article class="relative overflow-hidden rounded-lg border border-white/70 bg-white/78 p-5 shadow-[0_28px_80px_rgb(15_32_51_/_0.12)] backdrop-blur-xl before:absolute before:inset-0 before:-z-10 before:bg-[linear-gradient(135deg,rgb(255_255_255_/_0.88),rgb(255_247_224_/_0.72)_52%,rgb(24_90_52_/_0.08))] lg:p-6">
-                        <div class="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-[var(--color-accent)]/16"></div>
+                    <article class="group relative overflow-hidden rounded-lg border border-white/70 bg-white/78 p-5 shadow-[0_28px_80px_rgb(15_32_51_/_0.12)] backdrop-blur-xl transition duration-300 before:absolute before:inset-0 before:-z-10 before:bg-[linear-gradient(135deg,rgb(255_255_255_/_0.88),rgb(255_247_224_/_0.72)_52%,rgb(24_90_52_/_0.08))] hover:-translate-y-1 hover:border-[var(--color-accent)]/45 hover:bg-white/88 hover:shadow-[0_34px_90px_rgb(15_63_38_/_0.16)] lg:p-6">
+                        <div class="absolute right-0 top-0 h-24 w-24 rounded-bl-full bg-[var(--color-accent)]/16 transition duration-300 group-hover:bg-[var(--color-accent)]/24"></div>
                         <div class="relative grid gap-6 lg:grid-cols-[16rem_1fr] lg:items-start">
                             <aside class="flex justify-center lg:pt-7">
-                                <div class="h-32 w-32 overflow-hidden rounded-full bg-[var(--color-primary-soft)] shadow-[0_18px_44px_rgb(15_63_38_/_0.16)] ring-4 ring-white">
+                                <div class="h-32 w-32 overflow-hidden rounded-full bg-[var(--color-primary-soft)] shadow-[0_18px_44px_rgb(15_63_38_/_0.16)] ring-4 ring-white transition duration-300 group-hover:shadow-[0_22px_54px_rgb(15_63_38_/_0.22)] group-hover:ring-[var(--color-accent)]/50">
                                     @if ($doctor->photo)
-                                        <img src="{{ asset('storage/' . $doctor->photo) }}" alt="{{ $doctor->name }}" class="h-full w-full object-cover">
+                                        <img src="{{ asset('storage/' . $doctor->photo) }}" alt="{{ $doctor->name }}" class="h-full w-full object-cover transition duration-300 group-hover:scale-105">
                                     @else
                                         <div class="grid h-full place-items-center text-4xl font-extrabold text-[var(--color-primary)]/30">RS</div>
                                     @endif
@@ -100,7 +100,7 @@
                                     <p class="mt-1 text-sm font-bold text-[var(--color-muted)]">{{ $doctor->specialization?->name ?? 'Spesialis belum diisi' }}</p>
                                 </div>
 
-                                <div class="overflow-x-auto rounded-md border border-[var(--color-border)] bg-white/86 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.70)]">
+                                <div class="overflow-x-auto rounded-md border border-[var(--color-border)] bg-white/86 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.70)] transition duration-300 group-hover:border-[var(--color-accent)]/45">
                                     <table class="w-full min-w-[820px] table-fixed border-collapse text-center">
                                         <thead class="text-base font-extrabold text-[var(--color-text)]">
                                             <tr>
