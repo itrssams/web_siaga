@@ -8,7 +8,7 @@
         ['label' => 'Jadwal Dokter', 'href' => route('schedules.index')],
         ['label' => 'Artikel', 'href' => route('articles.index')],
         ['label' => 'Pengumuman', 'href' => route('announcements.index')],
-        ['label' => 'Sertifikat', 'href' => route('home') . '#sertifikat'],
+        ['label' => 'Sertifikat', 'href' => route('certificates.index')],
         ['label' => 'Tentang Kami', 'href' => route('home') . '#profil'],
     ];
 @endphp

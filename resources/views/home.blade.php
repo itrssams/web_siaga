@@ -33,7 +33,7 @@
                 ['icon' => 'heroicon-o-calendar-days', 'title' => 'Jadwal Dokter', 'href' => route('schedules.index')],
                 ['icon' => 'heroicon-o-megaphone', 'title' => 'Pengumuman', 'href' => route('announcements.index')],
                 ['icon' => 'heroicon-o-newspaper', 'title' => 'Artikel', 'href' => '#artikel'],
-                ['icon' => 'heroicon-o-shield-check', 'title' => 'Sertifikat', 'href' => '#sertifikat'],
+                ['icon' => 'heroicon-o-shield-check', 'title' => 'Sertifikat', 'href' => route('certificates.index')],
             ] as $service)
                 <a href="{{ $service['href'] }}" class="service-card">
                     <span class="service-icon">
@@ -123,7 +123,10 @@
         <div class="public-container">
             <div class="mb-8">
                 <p class="public-eyebrow mb-3">Sertifikat & Akreditasi</p>
-                <h2 class="text-3xl font-extrabold">Legalitas dan sertifikat rumah sakit</h2>
+                <div class="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+                    <h2 class="text-3xl font-extrabold">Legalitas dan sertifikat rumah sakit</h2>
+                    <a href="{{ route('certificates.index') }}" class="public-btn-outline text-sm">Lihat Semua</a>
+                </div>
             </div>
 
             <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

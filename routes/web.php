@@ -195,3 +195,24 @@ Route::get('/artikel/{article:slug}', function (Article $article) {
 
     return view('articles.show', compact('article', 'otherArticles'));
 })->name('articles.show');
+
+Route::get('/sertifikat', function (Request $request) {
+    $certificates = Schema::hasTable('certificates') ? Certificate::query()
+        ->where('is_active', true)
+        ->when($request->filled('search'), function ($query) use ($request): void {
+            $query->where(function ($query) use ($request): void {
+                $search = $request->string('search')->toString();
+
+                $query
+                    ->where('name', 'like', '%'.$search.'%')
+                    ->orWhere('certificate_number', 'like', '%'.$search.'%')
+                    ->orWhere('issuer', 'like', '%'.$search.'%');
+            });
+        })
+        ->orderBy('sort_order')
+        ->latest()
+        ->paginate(12)
+        ->withQueryString() : collect();
+
+    return view('certificates.index', compact('certificates'));
+})->name('certificates.index');
