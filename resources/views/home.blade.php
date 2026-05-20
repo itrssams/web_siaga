@@ -9,7 +9,7 @@
             <img src="{{ asset($heroImage) }}" alt="Gedung Rumah Sakit Siaga Al Munawwarah Samarinda" class="hero-masthead-image">
         @endif
 
-        <div class="public-container flex min-h-[clamp(28rem,calc(100svh-7.5rem),42rem)] items-center py-12 sm:py-14">
+        <div class="public-container flex min-h-[clamp(32rem,calc(100svh-7.5rem),46rem)] items-center py-12 sm:py-14">
             <div class="max-w-3xl animate-rise">
                 <p class="hero-eyebrow mb-4">Selamat Datang di Rumah Sakit Siaga Al Munawwarah Samarinda</p>
                 <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-5xl lg:text-6xl">
